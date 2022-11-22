@@ -2,6 +2,7 @@ import gradio as gr
 import numpy as np
 from PIL import Image
 import requests
+import xgboost
 
 import hopsworks
 import joblib
@@ -47,12 +48,17 @@ def titanic(sex, age, pclass, parch, embarked):
     # 'res' is a list of predictions returned as the label.
     res = model.predict(np.asarray(input_list,dtype=object).reshape(1,-1)) 
     # We add '[0]' to the result of the transformed 'res', because 'res' is a list, and we only want 
+<<<<<<< HEAD
     # the first element.
    
     
     flower_url = "https://raw.githubusercontent.com/avatar46/ID2223_lab1/main/images/" + str(res[0]) + ".png"
     img = Image.open(requests.get(flower_url, stream=True).raw)            
     return img
+=======
+    # the first element.       
+    return res[0]
+>>>>>>> ccc574de4d88b5ff88cc30fe4e58f5984bc6cf39
         
 demo = gr.Interface(
     fn=titanic,
@@ -67,7 +73,7 @@ demo = gr.Interface(
         gr.inputs.Number(default=1.0, label="Parch: # of parents / children aboard the Titanic "),
         gr.inputs.Radio(default='C (Cherbourg)', label="Embarkation Port", choices=['C (Cherbourg)', 'Q (Queenstown)', 'S (Southampton)']),
         ],
-    outputs=gr.Image(type="pil"))
+    outputs=gr.inputs.Number(label="survived"))
 
 demo.launch()
 

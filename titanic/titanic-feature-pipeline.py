@@ -1,8 +1,13 @@
 import os
 import modal
 import numpy as np
+<<<<<<< HEAD
  
 LOCAL=True
+=======
+#### Redundant file  
+LOCAL=False
+>>>>>>> ccc574de4d88b5ff88cc30fe4e58f5984bc6cf39
 
 if LOCAL == False:
    stub = modal.Stub()
@@ -16,7 +21,11 @@ def g():
     import hopsworks
     import pandas as pd
 
+<<<<<<< HEAD
     project = hopsworks.login()
+=======
+    project = hopsworks.login(api_key_value=os.environ["HOPSWORKS_KEY_TITANIC"]) #'api_key_value=os.environ["HOPSWORKS_KEY_TITANIC"]'
+>>>>>>> ccc574de4d88b5ff88cc30fe4e58f5984bc6cf39
     fs = project.get_feature_store()
     titanic_df = pd.read_csv("https://raw.githubusercontent.com/ID2223KTH/id2223kth.github.io/master/assignments/lab1/titanic.csv")
     #titanic_df.info()

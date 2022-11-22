@@ -1,11 +1,11 @@
 import os
 import modal
 
-LOCAL=True
+LOCAL=False
 
 if LOCAL == False:
    stub = modal.Stub()
-   image = modal.Image.debian_slim().apt_install(["libgomp1"]).pip_install(["hopsworks", "seaborn", "joblib", "scikit-learn"])
+   image = modal.Image.debian_slim().apt_install(["libgomp1"]).pip_install(["hopsworks", "seaborn", "joblib", "scikit-learn", "xgboost"])
 
    @stub.function(image=image, schedule=modal.Period(days=1), secret=modal.Secret.from_name("HOPSWORKS_API_KEY"))
    def f():
@@ -27,7 +27,7 @@ def g():
     import joblib
 
     # You have to set the environment variable 'HOPSWORKS_API_KEY' for login to succeed
-    project = hopsworks.login()
+    project = hopsworks.login(api_key_value=os.environ["HOPSWORKS_KEY_TITANIC"])
     # fs is a reference to the Hopsworks Feature Store
     fs = project.get_feature_store()
 
