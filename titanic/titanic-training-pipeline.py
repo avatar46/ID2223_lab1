@@ -1,7 +1,3 @@
-
-#### For titanic dataset use XGB
-
-
 import os
 import modal
 
@@ -11,7 +7,7 @@ if LOCAL == False:
    stub = modal.Stub()
    image = modal.Image.debian_slim().apt_install(["libgomp1"]).pip_install(["hopsworks", "seaborn", "joblib", "scikit-learn"])
 
-   @stub.function(image=image, schedule=modal.Period(days=1), secret=modal.Secret.from_name("HOPSWORKS_KEY_TITANIC"))
+   @stub.function(image=image, schedule=modal.Period(days=1), secret=modal.Secret.from_name("HOPSWORKS_API_KEY"))
    def f():
        g()
 
@@ -53,7 +49,7 @@ def g():
 
     # Train our model with the Scikit-learn K-nearest-neighbors algorithm using our features (X_train) and labels (y_train)
     model = xgb.XGBClassifier()
-    model.fit(X_train, y_train)   #.values.ravel()
+    model.fit(X_train, y_train.values.ravel())   #.values.ravel()
 
     # Evaluate model performance using the features from the test set (X_test)
     y_pred = model.predict(X_test)

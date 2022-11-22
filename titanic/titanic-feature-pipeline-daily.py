@@ -8,7 +8,7 @@ if LOCAL == False:
    stub = modal.Stub()
    image = modal.Image.debian_slim().pip_install(["hopsworks==3.0.4"]) 
 
-   @stub.function(image=image, schedule=modal.Period(days=1), secret=modal.Secret.from_name("HOPSWORKS_KEY_TITANIC"))
+   @stub.function(image=image, schedule=modal.Period(days=1), secret=modal.Secret.from_name("HOPSWORKS_API_KEY"))
    def f():
        g()
 
@@ -39,10 +39,10 @@ def get_random_person():
 
     surv_df = generate_person(1, 15, 40)
     dead_df = generate_person(0, 50,70)
-    #setosa_df =  generate_flower(0, 8, 4.5, 4.5, 2.3, 1.2, 2, 0.7, 0.3)
-    # randomly pick one of these 3 and write it to the featurestore
-    #pick_random = random.uniform(0,2)
-    pick_random=2
+    
+    # randomly pick one of these 2 and write it to the featurestore
+    pick_random = random.uniform(0,2)
+    #pick_random=1
     if pick_random >= 2:
         per_df = surv_df
         print("survived added")
@@ -57,7 +57,7 @@ def g():
     import hopsworks
     import pandas as pd
 
-    project = hopsworks.login() #api_key_value=os.environ["HOPSWORKS_KEY_TITANIC"]
+    project = hopsworks.login() 
     fs = project.get_feature_store()
 
     titanic_df = get_random_person()
