@@ -6,13 +6,8 @@ LOCAL=False
 
 if LOCAL == False:
    stub = modal.Stub()
-<<<<<<< HEAD
-   hopsworks_image = modal.Image.debian_slim().pip_install(["hopsworks==3.0.4","joblib","seaborn","sklearn","dataframe-image"])
-   @stub.function(image=hopsworks_image, schedule=modal.Period(days=1), secret=modal.Secret.from_name("HOPSWORKS_API_KEY"))
-=======
    hopsworks_image = modal.Image.debian_slim().pip_install(["hopsworks==3.0.4","joblib","seaborn","scikit-learn","dataframe-image","xgboost"])
    @stub.function(image=hopsworks_image, schedule=modal.Period(days=1), secret=modal.Secret.from_name("HOPSWORKS_KEY_TITANIC"))
->>>>>>> ccc574de4d88b5ff88cc30fe4e58f5984bc6cf39
    def f():
        g()
 
@@ -40,6 +35,7 @@ def g():
     feature_view = fs.get_feature_view(name="titanic_modal", version=1)
     batch_data = feature_view.get_batch_data()
     
+    print(batch_data)
     y_pred = model.predict(batch_data)
     #print(y_pred)
     offset = 1

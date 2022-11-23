@@ -21,5 +21,5 @@ We used Modal, Hopsworks, and Huggingface to build a Serverless ML system for th
 - Links to the HuggingFace spaces:
      - [Iris Predictive Analysis](https://huggingface.co/spaces/ZinebSN/iris)
      - [Iris Monitoring](https://huggingface.co/spaces/ZinebSN/iris-monitoring)
-     - [Titanic Predictive Analysis](https://huggingface.co/spaces/ZinebSN/titanic)
-     - [Titanic Monitoring](https://huggingface.co/spaces/ZinebSN/titanic-monitoring)
+     - [Titanic Predictive Analysis](https://huggingface.co/spaces/Yilin98/Titanic)
+     - [Titanic Monitoring](https://huggingface.co/spaces/Yilin98/titanic-monitor)

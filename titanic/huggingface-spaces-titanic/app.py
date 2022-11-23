@@ -12,7 +12,7 @@ fs = project.get_feature_store()
 
 
 mr = project.get_model_registry()
-model = mr.get_model("titanic_modal", version=5)
+model = mr.get_model("titanic_modal", version=1)
 model_dir = model.download()
 model = joblib.load(model_dir + "/titanic_model.pkl")
 
@@ -46,19 +46,13 @@ def titanic(sex, age, pclass, parch, embarked):
         input_list.append(0)
    
     # 'res' is a list of predictions returned as the label.
-    res = model.predict(np.asarray(input_list,dtype=object).reshape(1,-1)) 
-    # We add '[0]' to the result of the transformed 'res', because 'res' is a list, and we only want 
-<<<<<<< HEAD
-    # the first element.
-   
+    res = model.predict(np.asarray(input_list,dtype=object).reshape(1,-1))   
     
-    flower_url = "https://raw.githubusercontent.com/avatar46/ID2223_lab1/main/images/" + str(res[0]) + ".png"
-    img = Image.open(requests.get(flower_url, stream=True).raw)            
-    return img
-=======
+    # We add '[0]' to the result of the transformed 'res', because 'res' is a list, and we only want 
     # the first element.       
-    return res[0]
->>>>>>> ccc574de4d88b5ff88cc30fe4e58f5984bc6cf39
+    flower_url = "https://raw.githubusercontent.com/avatar46/ID2223_lab1/main/images/" + str(res[0]) + ".png"
+    img = Image.open(requests.get(flower_url, stream=True).raw)          
+    return img
         
 demo = gr.Interface(
     fn=titanic,
@@ -73,7 +67,7 @@ demo = gr.Interface(
         gr.inputs.Number(default=1.0, label="Parch: # of parents / children aboard the Titanic "),
         gr.inputs.Radio(default='C (Cherbourg)', label="Embarkation Port", choices=['C (Cherbourg)', 'Q (Queenstown)', 'S (Southampton)']),
         ],
-    outputs=gr.inputs.Number(label="survived"))
+    outputs=gr.Image(type="pil"))
 
 demo.launch()
 
